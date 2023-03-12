@@ -40,16 +40,16 @@ public class MainController {
                 telecom.disconnect();
                 return;
             case 5:
-                redo();
-                return;
-            case 6:
-                undo();
-                return;
-            case 7:
                 reset();
                 return;
+            case 6:
+                redo();
+                return;
+            case 7:
+                undo();
+                return;
             default:
-                throw new IllegalArgumentException("Unexpected command!");
+                System.out.println("You don't set the command!");
         }
     }
 
