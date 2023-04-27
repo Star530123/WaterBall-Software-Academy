@@ -1,3 +1,5 @@
+package receiver;
+
 /**
  * @author StarL
  */
