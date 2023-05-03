@@ -1,6 +1,7 @@
 import command.Command;
 import command.ConnectTelecomCommand;
 import command.DisconnectTelecomCommand;
+import command.MarcoCommand;
 import command.MoveTankBackwardCommand;
 import command.MoveTankForwardCommand;
 import command.ResetMainControlKeyboardCommand;
@@ -40,11 +41,20 @@ public class Main {
                     System.out.println("設置巨集指令 (y/n)：");
                     boolean doesSetMarco = scanner.nextLine()
                             .equals("y");
-                    if (doesSetMarco) System.out.println("巨集指令開發中~~");
+                    System.out.println("Choose one button that you want to set command(a~z): ");
+                    String input = scanner.nextLine();
+                    char button = input.charAt(0);
+                    if (doesSetMarco) {
+                        System.out.printf("要將哪些指令設置成快捷鍵 %s 的巨集（輸入多個數字，以空白隔開）: %n", button);
+                        System.out.println(commandInstruction);
+                        String[] commands = scanner.nextLine().split(" ");
+                        try {
+                            mainController.setShortcut(button, new MarcoCommand(totalCommands, commands));
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
                     else {
-                        System.out.println("Button(a~z): ");
-                        String input = scanner.nextLine();
-                        char button = input.charAt(0);
                         if (input.length() != 1 || button - 'a' < 0 || button - 'a' > 25) {
                             System.out.println("輸入錯誤的按鍵，請重來");
                             continue;
