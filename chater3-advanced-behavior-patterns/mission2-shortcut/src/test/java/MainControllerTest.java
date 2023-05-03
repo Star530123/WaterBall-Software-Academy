@@ -67,7 +67,7 @@ class MainControllerTest {
         Tank tank = mock(Tank.class);
         MoveTankForwardCommand moveTankForwardCommand = new MoveTankForwardCommand(tank);
         MainController mainController = new MainController(new Keyboard());
-        ResetMainControlKeyboardCommand resetMainControlKeyboardCommand = new ResetMainControlKeyboardCommand(mainController);
+        ResetMainControlKeyboardCommand resetMainControlKeyboardCommand = new ResetMainControlKeyboardCommand(mainController.getKeyboard());
         mainController.setShortcut('a', moveTankForwardCommand);
         mainController.setShortcut('r',resetMainControlKeyboardCommand);
         mainController.press('r');

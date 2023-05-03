@@ -1,7 +1,6 @@
 package command;
 
 import invoker.Keyboard;
-import invoker.MainController;
 
 /**
  * @author StarL
@@ -10,8 +9,8 @@ public class ResetMainControlKeyboardCommand implements Command {
     private final Keyboard keyboard;
     private Command[] previousKeyboardButtons;
 
-    public ResetMainControlKeyboardCommand(MainController mainController) {
-        this.keyboard = mainController.getKeyboard();
+    public ResetMainControlKeyboardCommand(Keyboard keyboard) {
+        this.keyboard = keyboard;
     }
 
     @Override

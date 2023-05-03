@@ -27,7 +27,7 @@ public class Main {
         totalCommands[1] = new MoveTankBackwardCommand(tank);
         totalCommands[2] = new ConnectTelecomCommand(telecom);
         totalCommands[3] = new DisconnectTelecomCommand(telecom);
-        totalCommands[4] = new ResetMainControlKeyboardCommand(mainController);
+        totalCommands[4] = new ResetMainControlKeyboardCommand(mainController.getKeyboard());
         String commandInstruction = IntStream.range(0, totalCommands.length)
                 .mapToObj(i -> String.format("(%d) %s%n", i, totalCommands[i].name()))
                 .collect(Collectors.joining());
