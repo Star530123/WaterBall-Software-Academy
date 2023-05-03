@@ -57,8 +57,10 @@ public class Main {
                     break;
                 case '2':
                     mainController.undo();
+                    break;
                 case '3':
                     mainController.redo();
+                    break;
                 default:
                     try {
                         mainController.press(operation);
@@ -67,6 +69,7 @@ public class Main {
                     }
                     break;
             }
+            System.out.println("=====================================");
         }
     }
 }

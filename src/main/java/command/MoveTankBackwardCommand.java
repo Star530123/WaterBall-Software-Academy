@@ -18,7 +18,7 @@ public class MoveTankBackwardCommand implements Command{
     }
 
     @Override
-    public void redo() {
+    public void undo() {
         tank.moveForward();
     }
 

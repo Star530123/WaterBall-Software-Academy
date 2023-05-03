@@ -18,7 +18,7 @@ public class DisconnectTelecomCommand implements Command{
     }
 
     @Override
-    public void redo() {
+    public void undo() {
         telecom.connect();
     }
 
