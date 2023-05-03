@@ -11,8 +11,8 @@ import java.util.stream.IntStream;
  */
 public class MainController {
     private final Keyboard keyboard;
-    private final Stack<Character> undoStack = new Stack<>();
-    private final Stack<Character> redoStack = new Stack<>();
+    private final Stack<Command> undoStack = new Stack<>();
+    private final Stack<Command> redoStack = new Stack<>();
 
     public MainController(Keyboard keyboard) {
         this.keyboard = keyboard;
@@ -23,8 +23,9 @@ public class MainController {
     }
 
     public void press(char button) {
-        keyboard.execute(button);
-        undoStack.push(button);
+        Command command = keyboard.getCommand(button);
+        command.execute();
+        undoStack.push(command);
         redoStack.clear();
     }
 
@@ -46,9 +47,9 @@ public class MainController {
             System.out.println("There is no undo command.");
             return;
         }
-        char button = undoStack.pop();
-        keyboard.undo(button);
-        redoStack.push(button);
+        Command command = undoStack.pop();
+        command.undo();
+        redoStack.push(command);
     }
 
     public void redo() {
@@ -56,8 +57,8 @@ public class MainController {
             System.out.println("There is no redo command.");
             return;
         }
-        char button = redoStack.pop();
-        keyboard.execute(button);
-        undoStack.push(button);
+        Command command = redoStack.pop();
+        command.execute();
+        undoStack.push(command);
     }
 }
