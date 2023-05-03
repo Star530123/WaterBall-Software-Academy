@@ -3,10 +3,6 @@ package command;
 import invoker.Keyboard;
 import invoker.MainController;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 /**
  * @author StarL
  */

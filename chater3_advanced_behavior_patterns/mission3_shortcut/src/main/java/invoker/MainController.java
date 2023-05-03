@@ -24,6 +24,7 @@ public class MainController {
 
     public void press(char button) {
         Command command = keyboard.getCommand(button);
+        if(command == null) throw new IllegalArgumentException("Non-provided command");
         command.execute();
         undoStack.push(command);
         redoStack.clear();
