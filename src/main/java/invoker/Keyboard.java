@@ -16,8 +16,10 @@ public class Keyboard {
         buttons[convert(button)] = command;
     }
 
-    public Command getCommand(char button) {
-        return buttons[convert(button)];
+    public void execute(char button) {
+        Command command = buttons[convert(button)];
+        if (command == null) throw new IllegalArgumentException("Non-provided button");
+        command.execute();
     }
 
     public Command[] initializeButtons() {

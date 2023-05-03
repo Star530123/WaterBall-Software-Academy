@@ -20,9 +20,7 @@ public class MainController {
     }
 
     public void press(char button) {
-        Command command = keyboard.getCommand(button);
-        if (command == null) throw new IllegalArgumentException("Non-provided button");
-        command.execute();
+        keyboard.execute(button);
     }
 
     public void showAvailableButtons() {
