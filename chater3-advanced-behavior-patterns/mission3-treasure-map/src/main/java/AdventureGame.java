@@ -3,32 +3,12 @@
  */
 public class AdventureGame {
     private final static int MAP_SIZE = 10;
-    private final MapObject[][] maps;
+    private final Map map;
 
     public AdventureGame() {
-        this.maps = initializeMap();
+        this.map = new Map(MAP_SIZE);
     }
 
-    private MapObject[][] initializeMap(){
-        MapObject[][] map = new MapObject[MAP_SIZE][MAP_SIZE];
-        initializeCharacter(map);
-        initializeObstacle(map);
-        initializeTreasure(map);
-        initializeMonster(map);
-        return map;
-    }
-
-    private void initializeMonster(MapObject[][] map) {
-    }
-
-    private void initializeTreasure(MapObject[][] map) {
-    }
-
-    private void initializeObstacle(MapObject[][] map) {
-    }
-
-    private void initializeCharacter(MapObject[][] map) {
-    }
 
     public void start() {
 
