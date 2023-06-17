@@ -33,7 +33,7 @@ public abstract class Role extends MapObject {
     protected abstract void move();
 
     protected boolean moveSuccessfully(int newX, int newY) {
-        if(x < 0 || y < 0 || x >= map.getObjects().length || y >= map.getObjects()[0].length) {
+        if(map.isOutOfRange(newX, newY)) {
             System.out.println("【錯誤】此移動會超出地圖範圍，請重新輸入");
             return false;
         }

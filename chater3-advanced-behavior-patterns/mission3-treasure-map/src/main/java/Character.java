@@ -48,11 +48,15 @@ public class Character extends Role{
 
     @Override
     public void attack() {
-
-    }
-
-    @Override
-    protected void takeDamage(int HP) {
-
+        int[] distance = this.direction.getDistance();
+        int x = this.x + distance[0];
+        int y = this.y + distance[1];
+        while(!this.map.isOutOfRange(x, y)) {
+            MapObject mapObject = this.map.getObject(x, y);
+            if(mapObject instanceof Obstacle) break;
+            else if(mapObject instanceof Monster) this.map.removeObject(x, y);
+            x += distance[0];
+            y += distance[1];
+        }
     }
 }

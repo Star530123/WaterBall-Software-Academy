@@ -5,6 +5,7 @@ import java.util.List;
  */
 public class Monster extends Role{
     private final static List<int[]> MOVE_DISTANCES = Direction.moveDistances();
+    private int damage = 50;
 
     public Monster(Map map, int x, int y) {
         super(map, x, y);
@@ -22,7 +23,9 @@ public class Monster extends Role{
 
     @Override
     protected boolean doMove() {
-        return false;
+        return MOVE_DISTANCES.stream()
+                .map(d -> map.getObject(getX() + d[0], getY() + d[1]))
+                .noneMatch(o -> o instanceof Character);
     }
 
     @Override
@@ -37,11 +40,11 @@ public class Monster extends Role{
 
     @Override
     public void attack() {
-
-    }
-
-    @Override
-    protected void takeDamage(int HP) {
-
+        Character character = (Character) MOVE_DISTANCES.stream()
+                .map(d -> map.getObject(getX() + d[0], getY() + d[1]))
+                .filter(o -> o instanceof Character)
+                .findFirst()
+                .orElse(null);
+        if(character != null) character.takeDamage(damage);
     }
 }

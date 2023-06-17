@@ -43,4 +43,13 @@ public class Map {
     public MapObject[][] getObjects() {
         return objects;
     }
+
+    public MapObject getObject(int x, int y) {
+        if(isOutOfRange(x, y)) return null;
+        return objects[x][y];
+    }
+
+    public boolean isOutOfRange(int x, int y) {
+        return x < 0 || y < 0 || x >= this.objects.length || y >= this.objects.length;
+    }
 }
