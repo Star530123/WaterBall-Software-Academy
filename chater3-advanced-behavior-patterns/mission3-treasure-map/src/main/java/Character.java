@@ -4,9 +4,38 @@
 public class Character extends Role{
     private Direction direction;
 
+    public Character(Map map) {
+        super(map);
+    }
+
     @Override
     public String display() {
         return direction.icon;
+    }
+
+    @Override
+    protected void initializeHP() {
+
+    }
+
+    @Override
+    protected boolean doMove() {
+        return false;
+    }
+
+    @Override
+    protected void move() {
+
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
+    @Override
+    protected void takeDamage(int HP) {
+
     }
 
     private enum Direction {
