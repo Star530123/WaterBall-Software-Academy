@@ -14,7 +14,7 @@ public class Character extends Role{
     }
 
     @Override
-    protected void initializeHP() {
+    protected int initializeHP() {
 
     }
 

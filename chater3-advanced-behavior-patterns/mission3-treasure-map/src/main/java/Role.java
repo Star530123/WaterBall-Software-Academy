@@ -12,6 +12,7 @@ public abstract class Role extends MapObject {
     public Role(Map map) {
         initializeHP();
         this.map = map;
+        this.HP = initializeHP();
     }
 
     protected void action() {
@@ -23,7 +24,7 @@ public abstract class Role extends MapObject {
         attack();
     }
 
-    protected abstract void initializeHP();
+    protected abstract int initializeHP();
 
     protected abstract boolean doMove();
 

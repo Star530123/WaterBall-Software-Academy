@@ -12,7 +12,7 @@ public class Monster extends Role{
     }
 
     @Override
-    protected void initializeHP() {
+    protected int initializeHP() {
 
     }
 
