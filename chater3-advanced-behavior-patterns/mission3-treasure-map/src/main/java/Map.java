@@ -33,6 +33,7 @@ public class Map {
     }
 
     public void moveRole(Role role, int newX, int newY) {
+        System.out.printf("【移動】從(%d,%d)移動到(%d, %d)%n", role.getX(),  role.getY(), newX, newY);
         this.objects[role.getX()][role.getY()] = null;
         this.objects[newX][newY] = role;
         role.setX(newX);

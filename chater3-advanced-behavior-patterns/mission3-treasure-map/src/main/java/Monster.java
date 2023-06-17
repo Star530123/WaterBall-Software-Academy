@@ -1,7 +1,11 @@
+import java.util.List;
+
 /**
  * @author StarL
  */
 public class Monster extends Role{
+    private final static List<int[]> MOVE_DISTANCES = Direction.moveDistances();
+
     public Monster(Map map, int x, int y) {
         super(map, x, y);
     }
@@ -23,7 +27,12 @@ public class Monster extends Role{
 
     @Override
     protected void move() {
-
+        int index = (int) (Math.random() * 3);
+        int size = MOVE_DISTANCES.size();
+        for(int i = 0; i < size; i++) {
+            int[] move = MOVE_DISTANCES.get((index + i) % size);
+            if(moveSuccessfully(move[0], move[1])) break;
+        }
     }
 
     @Override

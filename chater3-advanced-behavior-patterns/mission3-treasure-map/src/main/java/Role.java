@@ -32,13 +32,29 @@ public abstract class Role extends MapObject {
 
     protected abstract void move();
 
+    protected boolean moveSuccessfully(int newX, int newY) {
+        if(x < 0 || y < 0 || x >= map.getObjects().length || y >= map.getObjects()[0].length) {
+            System.out.println("【錯誤】此移動會超出地圖範圍，請重新輸入");
+            return false;
+        }
+        MapObject mapObject = map.getObjects()[newX][newY];
+        if(mapObject != null) touch(mapObject);
+        else this.map.moveRole(this, newX, newY);
+        return true;
+    }
+
     public abstract void attack();
 
     protected void touch(MapObject mapObject) {
+        System.out.printf("【觸碰】角色%s觸碰到%s%n", this.getClass().getName(), mapObject.getClass().getName());
         mapObject.touchedBy(this);
     }
 
     public void setState(State state) {
+        System.out.printf("【狀態改變】角色%s改變狀態，從%s變更為%s%n",
+                this.getClass().getName(),
+                this.state.getClass().getName(),
+                state.getClass().getName());
         this.state = state;
     }
 

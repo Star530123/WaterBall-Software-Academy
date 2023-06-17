@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -14,7 +13,7 @@ public class Character extends Role{
 
     @Override
     public String display() {
-        return direction.icon;
+        return direction.getIcon();
     }
 
     @Override
@@ -38,16 +37,13 @@ public class Character extends Role{
             move();
             return;
         }
-        int x = this.x + d.distance[0];
-        int y = this.y + d.distance[1];
-        if(x < 0 || y < 0 || x >= map.getObjects().length || y >= map.getObjects()[0].length) {
-            System.out.println("【錯誤】已超出地圖範圍，請重新輸入");
+        int x = this.x + d.getDistance()[0];
+        int y = this.y + d.getDistance()[1];
+        if(moveSuccessfully(x, y)) this.direction = d;
+        else {
+            System.out.println("【錯誤】移動失敗，請重新輸入");
             move();
         }
-        MapObject mapObject = map.getObjects()[x][y];
-        if(mapObject != null) touch(mapObject);
-        else this.map.moveRole(this, x, y);
-        this.direction = d;
     }
 
     @Override
@@ -58,27 +54,5 @@ public class Character extends Role{
     @Override
     protected void takeDamage(int HP) {
 
-    }
-
-    private enum Direction {
-        UP("↑", new int[]{0, -1}),
-        LEFT("←", new int[]{-1, 0}),
-        DOWN("↓", new int[]{0, 1}),
-        RIGHT("→", new int[]{1, 0});
-
-        private String icon;
-        private int[] distance;
-
-        Direction(String icon, int[] distance) {
-            this.icon = icon;
-            this.distance = distance;
-        }
-
-        public static Direction findByIcon(String icon) {
-            return Arrays.stream(values())
-                    .filter(d -> d.icon.equals(icon))
-                    .findFirst()
-                    .orElse(null);
-        }
     }
 }
