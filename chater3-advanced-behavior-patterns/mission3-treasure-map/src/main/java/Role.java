@@ -2,17 +2,19 @@
  * @author StarL
  */
 public abstract class Role extends MapObject {
-    private int x;
-    private int y;
-    private Map map;
+    protected int x;
+    protected int y;
+    protected Map map;
     private State state = State.NORMAL;
     private int stateEndurance;
     private int HP;
 
-    public Role(Map map) {
+    public Role(Map map, int x, int y) {
         initializeHP();
         this.map = map;
         this.HP = initializeHP();
+        this.x = x;
+        this.y = y;
     }
 
     protected void action() {
@@ -32,7 +34,11 @@ public abstract class Role extends MapObject {
 
     public abstract void attack();
 
-    private void setState(State state) {
+    protected void touch(MapObject mapObject) {
+        mapObject.touchedBy(this);
+    }
+
+    public void setState(State state) {
         this.state = state;
     }
 
@@ -43,5 +49,21 @@ public abstract class Role extends MapObject {
 
     private void restoreHP(int HP) {
         this.HP += HP;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

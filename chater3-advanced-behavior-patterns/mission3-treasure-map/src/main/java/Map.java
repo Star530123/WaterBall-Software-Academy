@@ -31,4 +31,15 @@ public class Map {
     public void removeObject(int x, int y) {
         this.objects[x][y] = null;
     }
+
+    public void moveRole(Role role, int newX, int newY) {
+        this.objects[role.getX()][role.getY()] = null;
+        this.objects[newX][newY] = role;
+        role.setX(newX);
+        role.setY(newY);
+    }
+
+    public MapObject[][] getObjects() {
+        return objects;
+    }
 }

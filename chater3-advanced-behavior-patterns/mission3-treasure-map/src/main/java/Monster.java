@@ -2,8 +2,8 @@
  * @author StarL
  */
 public class Monster extends Role{
-    public Monster(Map map) {
-        super(map);
+    public Monster(Map map, int x, int y) {
+        super(map, x, y);
     }
 
     @Override
@@ -13,7 +13,7 @@ public class Monster extends Role{
 
     @Override
     protected int initializeHP() {
-
+        return 1;
     }
 
     @Override
