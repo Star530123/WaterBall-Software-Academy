@@ -5,9 +5,9 @@ public abstract class Role extends MapObject {
     protected int x;
     protected int y;
     protected Map map;
-    private State state = State.NORMAL;
-    private int stateEndurance;
-    private int HP;
+    protected State state = State.NORMAL;
+    protected int stateEndurance;
+    protected int HP;
 
     public Role(Map map, int x, int y) {
         initializeHP();

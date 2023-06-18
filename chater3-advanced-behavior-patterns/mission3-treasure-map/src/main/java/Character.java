@@ -28,8 +28,14 @@ public class Character extends Role{
     }
 
     @Override
+    protected void action() {
+        System.out.printf("【資訊】目前Character狀態為%s、剩餘%d回合，血量%s%n", this.state.name(), this.stateEndurance, this.HP);
+        super.action();
+    }
+
+    @Override
     protected boolean doMove() {
-        System.out.println("【選擇動作】要讓角色移動嗎? (y/n)");
+        System.out.println("【選擇動作】輸入 y 選擇移動，輸入 n 選擇攻擊");
         return SCANNER.next().trim().equalsIgnoreCase("y");
     }
 
@@ -54,6 +60,7 @@ public class Character extends Role{
 
     @Override
     public void attack() {
+        System.out.println("Character 選擇攻擊!");
         int[] distance = this.direction.getDistance();
         int x = this.x + distance[0];
         int y = this.y + distance[1];

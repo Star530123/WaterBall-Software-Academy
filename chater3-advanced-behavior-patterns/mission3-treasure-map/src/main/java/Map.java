@@ -69,6 +69,7 @@ public class Map {
     }
 
     public void removeObject(int x, int y) {
+        System.out.printf("在(%d,%d)上的%s被消滅了!%n", x, y, this.objects[x][y].getClass().getName());
         this.objects[x][y] = null;
     }
 
