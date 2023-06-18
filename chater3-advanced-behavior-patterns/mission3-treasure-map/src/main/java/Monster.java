@@ -34,7 +34,7 @@ public class Monster extends Role{
         int size = MOVE_DISTANCES.size();
         for(int i = 0; i < size; i++) {
             int[] move = MOVE_DISTANCES.get((index + i) % size);
-            if(moveSuccessfully(move[0], move[1])) break;
+            if(moveSuccessfully(this.x + move[0], this.y + move[1])) break;
         }
     }
 
