@@ -82,4 +82,8 @@ public abstract class Role extends MapObject {
     public void setY(int y) {
         this.y = y;
     }
+
+    public int getHP() {
+        return HP;
+    }
 }

@@ -9,6 +9,12 @@ public class Character extends Role{
 
     public Character(Map map, int x, int y) {
         super(map, x, y);
+        this.direction = initializeDirection();
+    }
+
+    private Direction initializeDirection() {
+        int index = (int) (Math.random() * Direction.values().length);
+        return Direction.values()[index];
     }
 
     @Override
