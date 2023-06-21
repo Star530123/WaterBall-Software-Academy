@@ -11,6 +11,8 @@ public class Map {
     private final int POSITION_SIZE;
     private Set<Integer> usedPositions = new HashSet<>();
     private Character character;
+    private final Treasure[] ALL_TREASURES = new Treasure[]{ new AcceleratingPotion(), new DevilFruit(), new DokodemoDoor(),
+            new HealingPotion(), new KingsRock(), new Poison(), new SuperStar() };
 
     public Map(int mapSize) {
         this.objects = new MapObject[mapSize][mapSize];
@@ -39,8 +41,20 @@ public class Map {
         int count = (int) (POSITION_SIZE * probability);
         for (int i = 0; i < count; i++) {
             int[] position = generatePosition();
-            this.objects[position[0]][position[1]] = new DevilFruit(); // TODO 寶藏生成邏輯，現在先固定生成DevilFruit
+            this.objects[position[0]][position[1]] = generateTreasure(Math.random(), 0, 0);
         }
+    }
+
+    private Treasure generateTreasure(double target, double val, int index) {
+        if(index >= ALL_TREASURES.length) return null;
+        double probability = ALL_TREASURES[index].generateProbability();
+        val += probability;
+        try {
+            if(target <= val) return ALL_TREASURES[index].getClass().getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return generateTreasure(target, val, index + 1);
     }
 
     private void initializeObstacle() {
