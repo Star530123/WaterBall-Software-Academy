@@ -10,23 +10,84 @@ public abstract class Role extends MapObject {
     protected int HP;
 
     public Role(Map map, int x, int y) {
-        initializeHP();
+        fullHP();
         this.map = map;
-        this.HP = initializeHP();
+        this.HP = fullHP();
         this.x = x;
         this.y = y;
     }
 
     protected void action() {
-        if (state != State.NORMAL && --stateEndurance == 0) state = State.NORMAL;
+        beforeAction();
+        if (isDead()) return;
+        if (this.state != State.ORDERLESS)
+            chooseAction();
+        else
+            moveRestrictively();
+        afterAction();
+    }
+
+    private void moveRestrictively() {
+//        TODO
+        System.out.println("每回合隨機取得以下其中一種效果：1. 只能進行上下移動 2. 只能進行左右移動（角色只能移動，不能選擇做其他操作）");
+    }
+
+    public boolean isDead() {
+        return this.HP <= 0;
+    }
+
+    private void beforeAction() {
+        if (this.state == State.HEALING) {
+            restoreHP(30);
+            if (HP >= fullHP()) {
+                this.HP = fullHP();
+                setState(State.NORMAL);
+            }
+        }
+        if (this.state == State.POISONED) takeDamage(15);
+        this.stateEndurance--;
+        if (stateEndurance == 0) {
+            switch (this.state) {
+                case STOCKPILE:
+                    setState(State.ERUPTING);
+                    break;
+                case ERUPTING:
+                    setState(State.TELEPORT);
+                    break;
+                case TELEPORT:
+                    moveRandomly();
+                default:
+                    setState(State.NORMAL);
+                    break;
+            }
+        }
+    }
+
+    private void moveRandomly() {
+//        TODO
+        System.out.println("一回合後角色的位置將被隨機移動至任一空地");
+    }
+
+    private void chooseAction() {
         if (doMove()) {
             move();
             return;
         }
-        attack();
+        if (this.state == State.ERUPTING)
+            attackGlobally();
+        else attack();
     }
 
-    protected abstract int initializeHP();
+    private void attackGlobally() {
+//        TODO
+        System.out.println("角色的攻擊範圍擴充至「全地圖」，且攻擊行為變成「全場攻擊」：每一次攻擊時都會攻擊到地圖中所有其餘角色，且攻擊力為50。三回合過後取得瞬身狀態。");
+    }
+
+    private void afterAction() {
+        if (this.state == State.ACCELERATED) chooseAction();
+    }
+
+    protected abstract int fullHP();
 
     protected abstract boolean doMove();
 
@@ -56,11 +117,14 @@ public abstract class Role extends MapObject {
                 this.state.getClass().getName(),
                 state.getClass().getName());
         this.state = state;
+        if(state == State.NORMAL) this.stateEndurance = -1;
     }
 
     protected void takeDamage(int HP) {
+        if (this.state == State.INVINCIBLE) return;
         this.HP -= HP;
         if (HP <= 0) map.removeObject(x, y);
+        if (this.state == State.ACCELERATED || this.state == State.STOCKPILE) setState(State.NORMAL);
     }
 
     private void restoreHP(int HP) {

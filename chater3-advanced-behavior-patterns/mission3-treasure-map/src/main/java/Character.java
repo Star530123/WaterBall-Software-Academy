@@ -23,7 +23,7 @@ public class Character extends Role{
     }
 
     @Override
-    protected int initializeHP() {
+    protected int fullHP() {
         return 300;
     }
 

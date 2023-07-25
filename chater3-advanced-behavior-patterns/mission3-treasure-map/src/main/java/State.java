@@ -9,6 +9,7 @@ public enum State {
     HEALING(),
     ORDERLESS(),
     STOCKPILE(),
-    TELEPORT();
+    TELEPORT(),
+    ERUPTING();
 
 }
