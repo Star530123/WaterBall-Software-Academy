@@ -2,8 +2,6 @@
  * @author StarL
  */
 public abstract class Role extends MapObject {
-    protected int x;
-    protected int y;
     protected Map map;
     protected State state = State.NORMAL;
     protected int stateEndurance;
@@ -109,6 +107,7 @@ public abstract class Role extends MapObject {
     protected void touch(MapObject mapObject) {
         System.out.printf("【觸碰】角色%s觸碰到%s%n", this.getClass().getName(), mapObject.getClass().getName());
         mapObject.touchedBy(this);
+        if (mapObject instanceof Treasure) this.map.removeObject(mapObject.x, mapObject.y);
     }
 
     public void setState(State state) {

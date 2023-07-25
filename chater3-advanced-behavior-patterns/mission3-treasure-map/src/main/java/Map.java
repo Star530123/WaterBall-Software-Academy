@@ -41,7 +41,10 @@ public class Map {
         int count = (int) (POSITION_SIZE * probability);
         for (int i = 0; i < count; i++) {
             int[] position = generatePosition();
-            this.objects[position[0]][position[1]] = generateTreasure(Math.random(), 0, 0);
+            Treasure treasure = generateTreasure(Math.random(), 0, 0);
+            this.objects[position[0]][position[1]] = treasure;
+            assert treasure != null;
+            treasure.setPosition(position[0], position[1]);
         }
     }
 
